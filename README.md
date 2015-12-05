@@ -1,2 +1,6 @@
 # tic-tac-toe
-tic-tac-toe game
+
+## Introduction
+Simple terminal based tic-tac-toe game.
+
+
