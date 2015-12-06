@@ -14,10 +14,18 @@ class Square
     Square(int state);
 
     // Destructor
-    virtual ~State();
+    virtual ~Square();
 
-    // Set
-    
+    // Set - Reset
+    void SetState(State state);
+    void SetState(int state);
+    void Reset();
+
+    // Get
+    State GetState() const;
+
+    // Flip
+    void Flip();
 }
 
 #endif
