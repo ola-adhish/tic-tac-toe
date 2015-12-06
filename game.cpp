@@ -39,6 +39,7 @@ void Game::Play()
 			
 		} while (!ok);
 		
+		_board->Show();
 		State winner = _board->IsWinner();
 		_gameOver = (winner != NONE);
 	}

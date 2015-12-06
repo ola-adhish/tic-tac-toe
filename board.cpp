@@ -123,7 +123,7 @@ State Board::IsWinner() const
   for (i=0; i<_dim; ++i)
     {
       State prime_state = _squares[i][i].GetState();
-      State antip_state = _squares[_dim-i][_dim-i].GetState();
+      State antip_state = _squares[_dim-i-1][_dim-i-1].GetState();
       crosses_prime = crosses_prime && (prime_state == CROSS);
       circles_prime = circles_prime && (prime_state == CIRCLE);
       crosses_antip = crosses_antip && (antip_state == CROSS);
