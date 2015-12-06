@@ -2,20 +2,7 @@
 
 Board::Board(int dim)
 {
-  if (dim >= 3)
-    {
-      _dim = dim;
-      _squares = new Square*[_dim];
-      for (int i=0; i<_dim; ++i)
-	{
-	  _squares[i] = new Square[_dim];
-	}
-      Reset();
-    }
-  else
-    {
-      _dim = 0;
-    }
+  SetDim(dim);
 }
 
 Board::~Board()
@@ -45,6 +32,24 @@ bool Board::SetSquare(int row, int col, State value)
   else
     {
       return false;
+    }
+}
+
+void Board::SetDim(int dim)
+{
+  if (dim >= 3)
+    {
+      _dim = dim;
+      _squares = new Square*[_dim];
+      for (int i=0; i<_dim; ++i)
+	{
+	  _squares[i] = new Square[_dim];
+	}
+      Reset();
+    }
+  else
+    {
+      _dim = 0;
     }
 }
 
@@ -135,6 +140,11 @@ State Board::IsWinner() const
     }
   
   return State::NONE;
+}
+
+int Board::GetDim() const
+{
+  return _dim;
 }
 
 void Board::Show() const
