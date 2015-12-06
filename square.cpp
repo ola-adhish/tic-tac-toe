@@ -58,6 +58,20 @@ State Square::GetState() const
   return _state;
 }
 
+char Square::Show() const
+{
+  switch(_state)
+    {
+    case State::CROSS:
+      return 'X';
+    case State::CIRCLE:
+      return 'O';
+    case State::NONE:
+    default:
+      return ' ';
+    }
+}
+
 void Square::Flip()
 {
   switch(_state)

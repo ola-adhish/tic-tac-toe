@@ -23,6 +23,7 @@ class Square
 
     // Get
     State GetState() const;
+    char Show() const;
 
     // Flip
     void Flip();
