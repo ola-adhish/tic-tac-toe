@@ -2,7 +2,7 @@
 
 Square::Square()
 {
-  _state = State::NONE;
+  _state = NONE;
 }
 
 Square::Square(State state)
@@ -15,10 +15,10 @@ Square::Square(int state)
   switch(state)
     {
     case 1:
-      _state = State::CROSS;
+      _state = CROSS;
       break;
     case 2:
-      _state = State::CIRCLE;
+      _state = CIRCLE;
       break;
     default:
       _state = NONE;
@@ -38,10 +38,10 @@ void Square::SetState(int state)
   switch(state)
     {
     case 1:
-      _state = State::CROSS;
+      _state = CROSS;
       break;
     case 2:
-      _state = State::CIRCLE;
+      _state = CIRCLE;
       break;
     default:
       _state = NONE;
@@ -50,7 +50,7 @@ void Square::SetState(int state)
 
 void Square::Reset()
 {
-  _state = State::NONE;
+  _state = NONE;
 }
 
 State Square::GetState() const
@@ -62,11 +62,11 @@ char Square::Show() const
 {
   switch(_state)
     {
-    case State::CROSS:
+    case CROSS:
       return 'X';
-    case State::CIRCLE:
+    case CIRCLE:
       return 'O';
-    case State::NONE:
+    case NONE:
     default:
       return ' ';
     }
@@ -76,13 +76,13 @@ void Square::Flip()
 {
   switch(_state)
     {
-    case State::CROSS:
-      _state = State::CIRCLE;
+    case CROSS:
+      _state = CIRCLE;
       break;
-    case State::CIRCLE:
-      _state = State::CROSS;
+    case CIRCLE:
+      _state = CROSS;
       break;
-    case State::NONE:
+    case NONE:
     default:
       break;
     }

@@ -19,7 +19,7 @@ Game::~Game()
 void Game::Play()
 {
 	_gameOver = false;
-	Square* _player = new Square(State::CROSS);
+	Square* _player = new Square(CROSS);
 	int row, col;
 	
 	while (!_gameOver)
@@ -30,7 +30,7 @@ void Game::Play()
 			std::cout << "Player " << _player->Show() << ": ";
 			std::cin >> row >> col;
 			
-			ok = _board.SetSquare(row, col, _player->GetState());
+			ok = _board->SetSquare(row, col, _player->GetState());
 			
 			if (ok)
 			{
@@ -40,7 +40,7 @@ void Game::Play()
 		} while (!ok);
 		
 		State winner = _board->IsWinner();
-		_gameOver = (winner != State::NONE);
+		_gameOver = (winner != NONE);
 	}
 }
 

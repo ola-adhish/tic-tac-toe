@@ -1,7 +1,12 @@
 #ifndef SQUARE_H
 #define SQUARE_H
 
-#include "state.h"
+enum State
+{
+  NONE = 0,
+  CROSS,
+  CIRCLE
+};
 
 class Square
 {
@@ -27,7 +32,7 @@ class Square
 
     // Flip
     void Flip();
-}
+};
 
 #endif
 

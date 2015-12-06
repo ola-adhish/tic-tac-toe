@@ -9,12 +9,12 @@ Board::~Board()
 {
   for (int i=0; i<_dim; ++i)
     {
-      delete _square[i];
-      _square[i] = NULL;
+      delete _squares[i];
+      _squares[i] = NULL;
     }
 
-  delete _square;
-  _square = NULL;
+  delete _squares;
+  _squares = NULL;
 }
 
 bool Board::_isValidIndex(int index) const
@@ -59,7 +59,7 @@ void Board::Reset()
     {
       for (int j=0; j<_dim; ++j)
 	{
-	  _squares[i][j].SetState(State::NONE);
+	  _squares[i][j].SetState(NONE);
 	}
     }
 }
@@ -68,12 +68,12 @@ State Board::GetState(int row, int col) const
 {
   if (_isValidIndex(row) && _isValidIndex(col))
     {
-      return _squares[row-1][col-1];
+      return _squares[row-1][col-1].GetState();
     }
   else
     {
       std::cout << "Invalid indices ["<< row << ", " << col << "]." << std::endl;
-      return State::NONE;
+      return NONE;
     }
 }
 
@@ -87,32 +87,32 @@ State Board::IsWinner() const
 
   // Check rows and columns first  
   for (i=0; i<_dim; ++i)
-    {
+  {
       crosses_rows = true;
       circles_rows = true;
       crosses_cols = true;
       circles_cols = true;
       for (j=0; j<_dim; ++j)
-	{
-	  State row_state = _squares[i][j];
-	  State col_state = _squares[j][i];
+	  {
+		State row_state = _squares[i][j].GetState();
+		State col_state = _squares[j][i].GetState();
 
-	  crosses_rows = crosses_rows && (row_state == State::CROSS);
-	  circles_rows = circles_rows && (row_state == State::CIRCLE);
+		crosses_rows = crosses_rows && (row_state == CROSS);
+		circles_rows = circles_rows && (row_state == CIRCLE);
 
-	  crosses_cols = crosses_cols && (col_state == State::CROSS);
-	  circles_cols = circles_cols && (col_state == State::CIRCLE);
-	}
+		crosses_cols = crosses_cols && (col_state == CROSS);
+		circles_cols = circles_cols && (col_state == CIRCLE);
+	  }
 
       if (crosses_rows || crosses_cols)
-	{
-	  return State::CROSS;
-	}
+	  {
+		return CROSS;
+	  }
       
       if (circles_rows || circles_cols)
-	{
-	  return State::CIRCLE;
-	}
+	  {
+		return CIRCLE;
+	  }
     }
 
   // Check diagonals
@@ -122,24 +122,24 @@ State Board::IsWinner() const
   bool circles_antip = true;
   for (i=0; i<_dim; ++i)
     {
-      State prime_state = _square[i][i];
-      State antip_state = _square[_dim-i][_dim-i];
-      crosses_prime = crosses_prime && (prime_state == State::CROSS);
-      circles_prime = circles_prime && (prime_state == State::CIRCLE);
-      crosses_antip = crosses_antip && (antip_state == State::CROSS);
-      circles_antip = circles_antip && (antip_state == State::CIRCLE);
+      State prime_state = _squares[i][i].GetState();
+      State antip_state = _squares[_dim-i][_dim-i].GetState();
+      crosses_prime = crosses_prime && (prime_state == CROSS);
+      circles_prime = circles_prime && (prime_state == CIRCLE);
+      crosses_antip = crosses_antip && (antip_state == CROSS);
+      circles_antip = circles_antip && (antip_state == CIRCLE);
     }
   if (crosses_prime || crosses_antip)
     {
-      return State::CROSS;
+      return CROSS;
     }
   
   if (circles_prime || circles_antip)
     {
-      return State::CIRCLE;
+      return CIRCLE;
     }
   
-  return State::NONE;
+  return NONE;
 }
 
 int Board::GetDim() const
@@ -152,22 +152,22 @@ void Board::Show() const
   std::cout << std::endl;
 
   for (int i=0; i < _dim-1; ++i)
-    {
-      for (int j=0; j < _dim-1; ++j)
-	{
-	  std::cout << _square[i][j].Show() << "|";
-	}
-      std::cout << _square[i][_dim-1].Show() << std::endl;
+  {
+	  for (int j=0; j < _dim-1; ++j)
+	  {
+		  std::cout << _squares[i][j].Show() << "|";
+	  }
+      std::cout << _squares[i][_dim-1].Show() << std::endl;
       for (int k=0; k<((2*_dim)-1); ++k)
-	{
-	  std::cout << "_";
-	}
+	  {
+		  std::cout << "_";
+	  }
       std::cout << std::endl;
-    }
+  }
 
   for (int j=0; j < _dim-1; ++j)
-    {
-      std::cout << _square[i][j].Show() << "|";
-    }
-  std::cout << _square[i][_dim-1].Show() << std::endl;
+  {
+	  std::cout << _squares[_dim-1][j].Show() << "|";
+  }
+  std::cout << _squares[_dim-1][_dim-1].Show() << std::endl;
 }
