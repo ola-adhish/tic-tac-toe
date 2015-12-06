@@ -14,16 +14,18 @@ class Board
     
  public:
   // Constructors
-  Board(int dim);
+  Board(int dim=0);
   // Destructor
   virtual ~Board();
 
   // Setters
   bool SetSquare(int row, int col, State value);
+  void SetDim(int dim);
   void Reset();
   
   // Getters
   State GetState(int row, int col) const;
+  int GetDim() const;
   State IsWinner() const;
     
   // Display
