@@ -30,13 +30,21 @@ void Game::Play()
 			std::cout << "Player " << _player->Show() << ": ";
 			std::cin >> row >> col;
 			
-			ok = _board->SetSquare(row, col, _player->GetState());
-			
-			if (ok)
+			switch(_board->GetState(row, col))
 			{
-				_player->Flip();
+				case NONE:
+					ok = _board->SetSquare(row, col, _player->GetState());			
+					if (ok)
+					{
+						_player->Flip();
+					}
+					break;
+				case CROSS:
+				case CIRCLE:
+					std::cout << "This square is already taken !" << std::endl;
+					ok = false;
+					break;
 			}
-			
 		} while (!ok);
 		
 		_board->Show();
